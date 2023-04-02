@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansBook.GrainClasses", "OrleansBook.GrainClasses\OrleansBook.GrainClasses.csproj", "{7040DB31-1D6A-4264-87F7-6FDDDAF587C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansBook.GrainInterfaces", "OrleansBook.GrainInterfaces\OrleansBook.GrainInterfaces.csproj", "{1A17FED1-1186-4AB1-9D0A-7FBD16A33206}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansBook.Host", "OrleansBook.Host\OrleansBook.Host.csproj", "{49D253A0-1DBD-4C29-9A03-3B2A0A6D3F47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansBook.Client", "OrleansBook.Client\OrleansBook.Client.csproj", "{317BF8CF-441B-4CCB-9D83-1893ED24D684}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansBook.WebApi", "OrleansBook.WebApi\OrleansBook.WebApi.csproj", "{3F860EAE-06D1-4972-ADF0-417E5A098CBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrleansBook.Tests", "OrleansBook.Tests\OrleansBook.Tests.csproj", "{ADAAC878-DC7B-4456-9A33-6749D087D132}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7040DB31-1D6A-4264-87F7-6FDDDAF587C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7040DB31-1D6A-4264-87F7-6FDDDAF587C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7040DB31-1D6A-4264-87F7-6FDDDAF587C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7040DB31-1D6A-4264-87F7-6FDDDAF587C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A17FED1-1186-4AB1-9D0A-7FBD16A33206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A17FED1-1186-4AB1-9D0A-7FBD16A33206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A17FED1-1186-4AB1-9D0A-7FBD16A33206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A17FED1-1186-4AB1-9D0A-7FBD16A33206}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49D253A0-1DBD-4C29-9A03-3B2A0A6D3F47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49D253A0-1DBD-4C29-9A03-3B2A0A6D3F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49D253A0-1DBD-4C29-9A03-3B2A0A6D3F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49D253A0-1DBD-4C29-9A03-3B2A0A6D3F47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{317BF8CF-441B-4CCB-9D83-1893ED24D684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{317BF8CF-441B-4CCB-9D83-1893ED24D684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{317BF8CF-441B-4CCB-9D83-1893ED24D684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{317BF8CF-441B-4CCB-9D83-1893ED24D684}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F860EAE-06D1-4972-ADF0-417E5A098CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F860EAE-06D1-4972-ADF0-417E5A098CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F860EAE-06D1-4972-ADF0-417E5A098CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F860EAE-06D1-4972-ADF0-417E5A098CBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADAAC878-DC7B-4456-9A33-6749D087D132}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADAAC878-DC7B-4456-9A33-6749D087D132}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADAAC878-DC7B-4456-9A33-6749D087D132}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADAAC878-DC7B-4456-9A33-6749D087D132}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
