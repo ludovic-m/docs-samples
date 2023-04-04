@@ -13,7 +13,7 @@ using OrleansCodeGen.Orleans;
 namespace OrleansBook.GrainClasses
 {
 
-    public class RobotGrain : Grain, IRobotGrain
+    public class RobotGrain : Grain, IRobotGrain, IRemindable
     {
         //private Queue<string> instructions = new();
 
@@ -77,10 +77,11 @@ namespace OrleansBook.GrainClasses
             return instruction;
         }
 
-        public override Task OnActivateAsync(CancellationToken cancellationToken)
+        public override async Task OnActivateAsync(CancellationToken cancellationToken)
         {
             this.RegisterTimer(this.Reset, null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
-            return base.OnActivateAsync(cancellationToken);
+            await this.RegisterOrUpdateReminder("firmware", TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
+            await base.OnActivateAsync(cancellationToken);
         }
 
         Task Reset(object _)
@@ -94,6 +95,15 @@ namespace OrleansBook.GrainClasses
             this.instructionsDequeud = 0;
             this.instructionsEnqueud = 0;
 
+            return Task.CompletedTask;
+        }
+
+        public Task ReceiveReminder(string reminderName, TickStatus status)
+        {
+            if(reminderName == "firmware")
+            {
+                return this.AddInstruction("Update Firmware");
+            }
             return Task.CompletedTask;
         }
     }

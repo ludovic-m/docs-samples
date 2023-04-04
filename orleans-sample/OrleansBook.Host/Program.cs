@@ -16,6 +16,7 @@ internal class Program
                 siloBuilder.AddMemoryGrainStorage("robotStateStore");
                 siloBuilder.AddMemoryStreams("StreamProvider");
                 siloBuilder.AddMemoryGrainStorage("PubSubStore");
+                siloBuilder.UseInMemoryReminderService();
             })
             .ConfigureLogging(x => {
                 x.AddConsole();
