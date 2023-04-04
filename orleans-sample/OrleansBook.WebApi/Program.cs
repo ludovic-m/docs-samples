@@ -3,6 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseOrleansClient((context, clientBuilder) =>
     {
         clientBuilder.UseLocalhostClustering();
+        clientBuilder.AddMemoryStreams("StreamProvider");
     })
     .ConfigureLogging(x =>
     {

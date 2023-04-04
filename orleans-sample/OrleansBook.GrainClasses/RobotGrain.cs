@@ -17,6 +17,8 @@ namespace OrleansBook.GrainClasses
     {
         //private Queue<string> instructions = new();
 
+        private int instructionsEnqueud = 0;
+        private int instructionsDequeud = 0;
         private readonly ILogger<RobotGrain> _logger;
         private readonly IPersistentState<RobotState> _state;
         private readonly IAsyncStream<InstructionMessage> stream;
@@ -42,6 +44,7 @@ namespace OrleansBook.GrainClasses
 
 
             this._state.State.Instructions.Enqueue(instruction);
+            this.instructionsEnqueud += 1;
             //this.instructions.Enqueue(instruction);
             await this._state.WriteStateAsync();
         }
@@ -69,9 +72,29 @@ namespace OrleansBook.GrainClasses
             this._logger.LogWarning($"{key} executing {instruction}");
 
             await this.Publish(instruction, key);
-
+            this.instructionsDequeud += 1;
             await this._state.WriteStateAsync();
             return instruction;
+        }
+
+        public override Task OnActivateAsync(CancellationToken cancellationToken)
+        {
+            this.RegisterTimer(this.Reset, null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
+            return base.OnActivateAsync(cancellationToken);
+        }
+
+        Task Reset(object _)
+        {
+            var key = this.GetPrimaryKeyString();
+
+            Console.WriteLine($"{key} enqueued: {this.instructionsEnqueud}");
+            Console.WriteLine($"{key} dequeued: {this.instructionsDequeud}");
+            Console.WriteLine($"{key} queued: {this._state.State.Instructions.Count}");
+
+            this.instructionsDequeud = 0;
+            this.instructionsEnqueud = 0;
+
+            return Task.CompletedTask;
         }
     }
 }

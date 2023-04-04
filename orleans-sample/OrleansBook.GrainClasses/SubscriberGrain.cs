@@ -23,15 +23,10 @@ namespace OrleansBook.GrainClasses
             await base.OnActivateAsync(cancellationToken);
         }
 
-        public Task OnCompletedAsync()
-        {
-            return Task.CompletedTask;
-        }
+        public Task OnCompletedAsync() => Task.CompletedTask;
+        
 
-        public Task OnErrorAsync(Exception ex)
-        {
-            return Task.CompletedTask;
-        }
+        public Task OnErrorAsync(Exception ex) => Task.CompletedTask;
 
         public Task OnNextAsync(InstructionMessage item, StreamSequenceToken? token = null)
         {
