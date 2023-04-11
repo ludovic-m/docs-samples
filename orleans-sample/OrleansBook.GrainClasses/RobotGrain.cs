@@ -7,8 +7,10 @@ using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Runtime;
 using Orleans.Streams;
+using Orleans.Transactions.Abstractions;
 using OrleansBook.GrainInterfaces;
 using OrleansCodeGen.Orleans;
+using OrleansCodeGen.Orleans.Transactions.Abstractions;
 
 namespace OrleansBook.GrainClasses
 {
@@ -23,7 +25,8 @@ namespace OrleansBook.GrainClasses
         private readonly IPersistentState<RobotState> _state;
         private readonly IAsyncStream<InstructionMessage> stream;
 
-        public RobotGrain(ILogger<RobotGrain> logger, [PersistentState("robotState", "robotStateStore")] IPersistentState<RobotState> state)
+        public RobotGrain(ILogger<RobotGrain> logger, 
+            [PersistentState("robotState", "robotStateStore")] IPersistentState<RobotState> state) 
         {
             _logger = logger;
             _state = state;
@@ -42,16 +45,24 @@ namespace OrleansBook.GrainClasses
             var key = this.GetPrimaryKeyString();
             this._logger.LogWarning($"{key} adding {instruction}");
 
+            // Without Transaction
 
             this._state.State.Instructions.Enqueue(instruction);
             this.instructionsEnqueud += 1;
-            //this.instructions.Enqueue(instruction);
+            // this.instructions.Enqueue(instruction);
             await this._state.WriteStateAsync();
+
+            // With Transaction
+            //await this._transactionState.PerformUpdate(state => state.Instructions.Enqueue(instruction));
         }
 
-        public Task<int> GetInstructionCount()
+        public async Task<int> GetInstructionCount()
         {
-            return Task.FromResult(this._state.State.Instructions.Count);
+            // Without Transaction 
+            return await Task.FromResult(this._state.State.Instructions.Count);
+
+            // With Transaction
+            //return await this._transactionState.PerformRead(r => r.Instructions.Count);
         }
 
         /// <summary>
@@ -61,26 +72,44 @@ namespace OrleansBook.GrainClasses
         /// <returns></returns>
         public async Task<string> GetNextInstruction()
         {
-            if(this._state.State.Instructions.Count == 0)
+            var key = this.GetPrimaryKeyString();
+
+            // Without Transaction
+
+            if (this._state.State.Instructions.Count == 0)
             {
                 return null;
             }
 
             var instruction = this._state.State.Instructions.Dequeue();
 
-            var key = this.GetPrimaryKeyString();
-            this._logger.LogWarning($"{key} executing {instruction}");
+
 
             await this.Publish(instruction, key);
             this.instructionsDequeud += 1;
             await this._state.WriteStateAsync();
+
+            // With Transaction
+
+            //string instruction = null;
+            //await this._transactionState.PerformUpdate(s =>
+            //{
+            //    if (s.Instructions.Count == 0)
+            //        return;
+
+            //    instruction = s.Instructions.Dequeue();
+            //});
+
+            if (instruction is not null)
+                this._logger.LogWarning($"{key} executing {instruction}");
+
             return instruction;
         }
 
         public override async Task OnActivateAsync(CancellationToken cancellationToken)
         {
-            this.RegisterTimer(this.Reset, null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
-            await this.RegisterOrUpdateReminder("firmware", TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
+            //this.RegisterTimer(this.Reset, null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
+            //await this.RegisterOrUpdateReminder("firmware", TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
             await base.OnActivateAsync(cancellationToken);
         }
 

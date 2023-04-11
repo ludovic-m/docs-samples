@@ -5,16 +5,31 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>6541a985-761d-416e-9492-d3ca4fe49e8b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
     <PackageReference Include="Microsoft.Orleans.Core" Version="7.1.1" />
+    <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="7.1.1" />
     <PackageReference Include="Microsoft.Orleans.Server" Version="7.1.1" />
     <PackageReference Include="Microsoft.Orleans.Streaming" Version="7.1.1" />
+    <PackageReference Include="Microsoft.Orleans.Streaming.EventHubs" Version="7.1.1" />
+    <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="7.1.1" />
     <PackageReference Include="OrleansDashboard" Version="7.2.0" />
   </ItemGroup>
 
