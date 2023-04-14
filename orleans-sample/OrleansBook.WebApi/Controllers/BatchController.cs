@@ -18,7 +18,7 @@ namespace OrleansBook.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(IDictionary<string, string> values)
         {
-            var grain = _grainFactory.GetGrain<IBatchGrain>(0); // It's a stateless worker, any identity is good
+            var grain = _grainFactory.GetGrain<IBatchGrain>(0, "OrleansBook.GrainClasses.RobotGrain"); // It's a stateless worker, any identity is good
 
             var input = values.Select(k => (k.Key, k.Value)).ToArray();
 

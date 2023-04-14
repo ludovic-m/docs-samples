@@ -50,7 +50,6 @@ internal class Program
                             options.PersistInterval = TimeSpan.FromSeconds(10);
                         }));
                 });
-                //siloBuilder.AddMemoryStreams("StreamProvider");
                 //siloBuilder.UseInMemoryReminderService();
 
                 //if (config["ORLEANS_STORAGE_CONNECTION_STRING"] is { } connectionString)
