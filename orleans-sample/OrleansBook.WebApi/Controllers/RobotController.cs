@@ -23,7 +23,7 @@ namespace OrleansBook.WebApi.Controllers
         {
             IRobotGrain grain = _grainFactory.GetGrain<IRobotGrain>(name, grainNamespace);
             var instruction = await grain.GetNextInstruction();
-
+            
             return Ok(instruction);
         }
 
@@ -33,7 +33,7 @@ namespace OrleansBook.WebApi.Controllers
         {
             IRobotGrain grain = _grainFactory.GetGrain<IRobotGrain>(name, grainNamespace);
             var instruction = await grain.GetInstructionCount();
-
+            
             return Ok(instruction);
         }
 
